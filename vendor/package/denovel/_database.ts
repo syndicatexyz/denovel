@@ -1,5 +1,5 @@
-import { Mongo,Postgres,Mysql } from "../../../config/database.ts";
-import { connectMongo } from "./drivers/index.ts";
+import { Mongo,Postgres,Mysql,Connection } from "../../../config/database.ts";
+import { connectMongo,connectPgsql,connectMysql } from "./drivers/index.ts";
 
 /**
  * Denovel - A Deno Framework for Web Artisan
@@ -8,4 +8,12 @@ import { connectMongo } from "./drivers/index.ts";
  * @author   Muhammad Fauzan <developerfauzan@asraja.com>
  */
 
-export const database = await connectMongo(Mongo);
+async function driver(Connection: string): Promise<any>{
+    if(Connection === 'pgsql'){
+        return await connectPgsql(Postgres);
+    }else if(Connection === 'mongod'){
+        return await connectMongo(Mongo);
+    }
+}
+
+export const database = await driver(Connection);
