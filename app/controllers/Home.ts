@@ -14,7 +14,7 @@ export class Home extends Controller {
         const denovel = database.collection("denovel");
         const datas = await denovel.find({ example: { $ne: null } });
         const output = await dejs.renderFileToString(`${Deno.cwd()}/resources/views/index.ejs`, { datas });
-        return ctx.response.body = output;
+        ctx.response.body = output;
     }
 
     /**
