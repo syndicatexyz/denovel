@@ -21,7 +21,7 @@ cd denovel
 PORT=8000
 BASE_URL=http://localhost:8000
 
-DB_CONNECTION=mongo
+DB_CONNECTION=mongod
 DB_HOST=mongodb://localhost
 DB_NAME=denovel
 DB_USER=
