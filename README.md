@@ -63,5 +63,4 @@ Contributions, issues and feature requests <a href="https://t.me/fauzandevelover
 ------------
 
 - **Made with ❤️ by Muhammad Fauzan .**
-- denovel is open-sourced software licensed under the MIT license.
 
