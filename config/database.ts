@@ -71,11 +71,7 @@ export const Mongo: mongo = {
     username: config().DB_USER, //optional
     db: config().DB_NAME || 'denovel',
     password: config().DB_PASS, //optional
-<<<<<<< HEAD
-    port: parseInt(config().DB_PORT) || 27107,
-=======
     port: parseInt(config().DB_PORT) || 27017,
->>>>>>> master
 }
 
 /**
