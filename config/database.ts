@@ -31,7 +31,7 @@ interface mongo {
     username: string; //optional
     db: string;
     password: string; //optional
-    port: string;
+    port: number;
 }
 
 /*
@@ -71,7 +71,7 @@ export const Mongo: mongo = {
     username: config().DB_USER, //optional
     db: config().DB_NAME || 'denovel',
     password: config().DB_PASS, //optional
-    port: config().DB_PORT || '27107',
+    port: parseInt(config().DB_PORT) || 27017,
 }
 
 /**
