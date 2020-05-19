@@ -15,13 +15,13 @@ git clone https://github.com/fauzan121002/denovel.git
 cd denovel
 ```
 
-2. **Open ```.env``` then changes by your database information (Only supports mongo yet)**
+2. **Open ```.env``` then changes by your database information (Only supports mongod(MongoDB) and pgsql(PostgreSQL) yet)**
 
 ```
 PORT=8000
 BASE_URL=http://localhost:8000
 
-DB_CONNECTION=mysql
+DB_CONNECTION=mongod
 DB_HOST=mongodb://localhost
 DB_NAME=denovel
 DB_USER=
@@ -58,10 +58,8 @@ Contributions, issues and feature requests <a href="https://t.me/fauzandevelover
 
 ## 📝 License
 - Copyright © 2020 Muhammad Fauzan.
-- **Denovel is open-sourced software licensed under the MIT license.**
 
 ------------
 
-- **Made with ❤️ by Muhammad Fauzan .**
-- denovel is open-sourced software licensed under the MIT license.
+- **Made with ❤️ by Muhammad Fauzan.**
 
