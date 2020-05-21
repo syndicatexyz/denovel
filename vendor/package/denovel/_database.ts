@@ -10,9 +10,9 @@ import { connectMongo,connectPgsql,connectMysql } from "./drivers/index.ts";
 
 async function driver(Connection: string): Promise<any>{
     if(Connection === 'pgsql'){
-        return await connectPgsql(Postgres);
+        return connectPgsql(Postgres);
     }else if(Connection === 'mongod'){
-        return await connectMongo(Mongo);
+        return connectMongo(Mongo);
     }
 }
 
