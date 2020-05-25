@@ -1,8 +1,13 @@
+/**
+ * Denovel - A Deno Framework for Web Artisan
+ *
+ * @package  Denovel
+ * @author   Muhammad Fauzan <developerfauzan@asraja.com>
+ */
+
 export class Foundation {
 	container: Array<object> = []
 	service: any = {}
-	singletonBowl: Array<object> = []
-
 
 	bind(value: any): void{
 		let key = typeof value === "function" ? value.name : value.constructor.name;
@@ -30,13 +35,5 @@ export class Foundation {
 
 	isFunction(value: any){
 		return typeof value === 'function' ? value() : value;
-	}
-
-	checkIfExist(key: string){
-		return this.container.find((obj: any) => obj.key === key);
-	}
-
-	reconstructed(){
-		this.container = this.container.filter((obj: any) => obj.type === "bind");
 	}
 }
