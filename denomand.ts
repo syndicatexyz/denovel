@@ -1,10 +1,13 @@
-import * as pkg from "./vendor/__init__.ts";
+import app from "./bootstrap/app.ts";
 
 /**
- * Denomand - A Deno Framework Artisan CLI
+ * Denovel - A Deno Framework for Web Artisan
  *
- * @package  Denomand
+ * @package  Denovel
  * @author   Muhammad Fauzan <developerfauzan@asraja.com>
  */
- 
-new pkg.Denomand().start()
+
+app.make("Server")->versioning();
+
+app.make("Denomand")->command();
+

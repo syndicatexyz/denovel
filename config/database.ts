@@ -10,7 +10,7 @@ import { config } from "https://deno.land/x/dotenv/mod.ts";
 |
 */
 
-interface mysql {
+export interface mysql {
     hostname: string;
     username: string;
     password: string;
@@ -18,7 +18,7 @@ interface mysql {
     port: number;
 }
 
-interface postgres {
+export interface postgres {
     host: string;
     user: string;
     password: string;
@@ -26,7 +26,7 @@ interface postgres {
     database: string;
 }
 
-interface mongo {
+export interface mongo {
     hostname: string;
     username: string; //optional
     db: string;

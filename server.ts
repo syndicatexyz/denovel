@@ -1,4 +1,4 @@
-import * as run from "./vendor/__init__.ts";
+import app from "./bootstrap/app.ts";
 
 /**
  * Denovel - A Deno Framework for Web Artisan
@@ -7,5 +7,6 @@ import * as run from "./vendor/__init__.ts";
  * @author   Muhammad Fauzan <developerfauzan@asraja.com>
  */
 
-run.__server__()
+app.make("Server").versioning();
 
+app.make("Server").run();

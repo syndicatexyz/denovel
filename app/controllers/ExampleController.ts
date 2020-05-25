@@ -1,42 +1,31 @@
-import Controller from './Controller.ts';
-import { database } from '../../vendor/package/denovel/_database.ts';
+import { database } from '../../vendor/Denovel/Database.ts';
 import * as dejs from 'https://deno.land/x/dejs@0.6.0/mod.ts';
+import { RouterContext } from "../../vendor/Denovel/Support/Facades/Request.ts";
 
-export class Home extends Controller {
 
-    /**
-     * Set the output of index function
-     * @param {any}
-     * @return {any} abstract of index function
-     */
-
-    async index(ctx: any){
-        const denovel = database.collection("denovel");
-        const datas = await denovel.find({ example: { $ne: null } });
-        const output = await dejs.renderFileToString(`${Deno.cwd()}/resources/views/index.ejs`, { datas });
-        ctx.response.body = output;
-    }
+export class ExampleController {
 
     /**
      * Get the input of get function
-     * @param {any}
-     * @return {any} abstract of get function
+     * @param {Context}
+     * @return {Context} abstract of get function
      */
 
-    async get(ctx: any){
+    async get({request,response,params}: RouterContext){
         const denovel = database.collection("denovel");
+
         const datas = await denovel.find({ example: { $ne: null } });
         const output = await dejs.renderFileToString(`${Deno.cwd()}/resources/views/index.ejs`, { datas });
-        ctx.response.body = output;
+        response.body = output;
     }  
 
     /**
      * Post the input of post function
-     * @param {any}
-     * @return {any} abstract of post function
+     * @param {Context}
+     * @return {Context} abstract of post function
      */
 
-    async post({request,response}: any){
+    async post({request,response,params}: RouterContext){
         const body = await request.body();
         const value = body.value.get("example");
         const denovel = database.collection("denovel");
@@ -51,11 +40,11 @@ export class Home extends Controller {
 
     /**
      * Edit the input of edit function
-     * @param {any}
-     * @return {any} abstract of edit function
+     * @param {RouterContext}
+     * @return {RouterContext} abstract of edit function
      */
 
-    async edit({request,response,params}: any){
+    async edit({request,response,params}: RouterContext){
         const denovel = database.collection("denovel");
         const datas = await denovel.findOne({ _id: { "$oid": params.id } });
         const output = await dejs.renderFileToString(`${Deno.cwd()}/resources/views/edit.ejs`, { datas });
@@ -64,11 +53,11 @@ export class Home extends Controller {
 
     /**
      * Put the input of put function
-     * @param {any}
-     * @return {any} abstract of put function
+     * @param {RouterContext}
+     * @return {RouterContext} abstract of put function
      */
 
-    async put({request,response,params}: any){
+    async put({request,response,params}: RouterContext){
         const body = await request.body();
         const value = body.value.get("example");
         const denovel = database.collection("denovel");
@@ -86,11 +75,11 @@ export class Home extends Controller {
 
     /**
      * Delete the input of delete function
-     * @param {any}
-     * @return {any} abstract of delete function
+     * @param {RouterContext}
+     * @return {RouterContext} abstract of delete function
      */
 
-    async delete({request,response,params}: any){
+    async delete({request,response,params}: RouterContext){
         const denovel = database.collection("denovel");   
         await denovel.deleteOne({ _id: { "$oid": params.id} });
 

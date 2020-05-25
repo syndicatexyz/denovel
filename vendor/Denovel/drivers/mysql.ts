@@ -1,7 +1,7 @@
 import { Client } from "https://deno.land/x/mysql/mod.ts";
+import { mysql } from "../../../config/database.ts";
 
-export async function connectMysql(Mysql: any): Promise<any>{
-
+export async function connectMysql(Mysql: mysql): Promise<Client>{
    const client = await new Client().connect({
      hostname: Mysql.hostname,
      username: Mysql.username,
@@ -13,5 +13,4 @@ export async function connectMysql(Mysql: any): Promise<any>{
    let db = await client;
    
    return db;
-
 }

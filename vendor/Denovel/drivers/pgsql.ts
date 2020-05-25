@@ -1,6 +1,7 @@
 import { Client } from "https://deno.land/x/postgres/mod.ts";
+import { postgres } from "../../../config/database.ts";
 
-export async function connectPgsql(Postgres: any): Promise<any> {
+export async function connectPgsql<T>(Postgres: postgres): Promise<Client> {
   const client = new Client({
     user: Postgres.user,
     database: Postgres.database,

@@ -21,7 +21,7 @@ import template from "./template.ts"
  */
 
 export class Denomand {
-  start(){
+  command(){
     const parser = args
       .describe("Denomand CLI")
       .with(
