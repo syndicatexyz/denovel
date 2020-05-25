@@ -17,6 +17,12 @@ import { router } from "../../../../routes/web.ts";
 
 const app = new Application();
 
+/**
+ * Progress Bar
+ * 
+ * @return {Promise} 
+ */
+
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const pb = new ProgressBar(30, 60, percentageWidget, amountWidget);
