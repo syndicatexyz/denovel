@@ -43,9 +43,9 @@ deno run -A --unstable denomand.ts --name </YourControllerName>
 
 ## 💻 What to do after create a controller?
 
-* 1. Open ControllerMap.ts inside $ROOT/app to add your controller
-* 2. Open web.ts inside $ROOT/routes to add routes to your controller
-* 3. Then use your [YourControllerName]! ( See HomeController.ts inside $ROOT/app/controllers for controller example )
+* Open ControllerMap.ts inside $ROOT/app to add your controller
+* Open web.ts inside $ROOT/routes to add routes to your controller
+* Then use your [YourControllerName]! ( See HomeController.ts inside $ROOT/app/controllers for controller example )
 
 
 ## 🧑 Author
