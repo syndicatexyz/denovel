@@ -1,7 +1,7 @@
+<h1 align="center">Denovel - A Deno Framework For Web Artisan 👋</h1>
+
 [![](https://img.shields.io/github/issues/fauzan121002/denovel?style=flat-square)](https://img.shields.io/github/issues/fauzan121002/denovel?style=flat-square) ![](https://img.shields.io/github/stars/fauzan121002/denovel?style=flat-square)
 ![](https://img.shields.io/github/forks/fauzan121002/denovel?style=flat-square) ![](https://img.shields.io/github/license/fauzan121002/denovel?style=flat-square) [![saythanks](https://img.shields.io/badge/say-thanks-ff69b4.svg?style=flat-square)](https://saythanks.io/to/zaidanline67%40gmail.com) [![HitCount](http://hits.dwyl.com/fauzan121002/https://github.com/fauzan121002/denovel.svg)](http://hits.dwyl.com/fauzan121002/https://github.com/fauzan121002/denovel)  [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg?style=flat-square)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity) [![GitHub followers](https://img.shields.io/github/followers/fauzan121002.svg?style=flat-square&label=Follow&maxAge=2592000)](https://github.com/fauzan121002?tab=followers)
-
-<h1 align="center">Denovel - A Deno Framework For Web Artisan 👋</h1>
 
 ### 🤔 What is Denovel?
 Denovel is Web Based Framework made by <a href="https://github.com/fauzan121002"> Muhammad Fauzan </a>. **Denovel is Inspired by Laravel.**
@@ -15,7 +15,7 @@ git clone https://github.com/fauzan121002/denovel.git
 cd denovel
 ```
 
-2. **Open ```.env``` then changes by your database information (Only supports mongod(MongoDB) and pgsql(PostgreSQL) yet)**
+2. **Open ```.env``` then changes by your database information**
 
 ```
 PORT=8000
@@ -41,9 +41,9 @@ deno run -A --unstable denomand.ts --name </YourControllerName>
 
 ## 💻 What to do after create a controller?
 
-### 1. Open ControllerMap.ts inside $ROOT/app to add your controller
-### 2. Open web.ts inside $ROOT/routes to add routes to your controller
-### 3. Then use your [YourControllerName]! ( See Home.ts inside $ROOT/app/controllers for example )
+* 1. Open ControllerMap.ts inside $ROOT/app to add your controller
+* 2. Open web.ts inside $ROOT/routes to add routes to your controller
+* 3. Then use your [YourControllerName]! ( See HomeController.ts inside $ROOT/app/controllers for controller example )
 
 
 ## 🧑 Author
