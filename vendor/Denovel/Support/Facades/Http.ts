@@ -18,22 +18,6 @@ import { router } from "../../../../routes/web.ts";
 const app = new Application();
 
 /**
- * Progress Bar
- * 
- * @return {Promise} 
- */
-
-const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
-const pb = new ProgressBar(30, 60, percentageWidget, amountWidget);
-
-for (let i = 0; i < 30; i++) {
-  await pb.update(i);
-  await sleep(100);
-}
-await pb.finish();
-
-/**
  * Get the response time of the application
  * 
  * @return {Promise<void>} 
@@ -42,7 +26,7 @@ await pb.finish();
 app.use(async (ctx, next): Promise<void> => {
   await next();
   const rt = ctx.response.headers.get("X-Response-Time");
-  console.log(`${ctx.request.method} ${ctx.request.url} - ${rt}`);
+  console.log(`[${ctx.request.method}] ${ctx.request.url} - ${rt}`);
 });
 
 /**
@@ -57,6 +41,21 @@ app.use(async (ctx, next): Promise<void> => {
   const ms = Date.now() - start;
   ctx.response.headers.set("X-Response-Time", `${ms}ms`);
 });
+
+/**
+ * Progress Bar
+ * 
+ * @return {Promise} 
+ */
+
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+const pb = new ProgressBar(30, 60, percentageWidget, amountWidget);
+
+for (let i = 0; i < 30; i++) {
+  await pb.update(i);
+  await sleep(100);
+}
 
 /**
  * Router Plugin
@@ -82,3 +81,5 @@ app.use(async (ctx) => {
 });
 
 export default app;
+
+await pb.finish();

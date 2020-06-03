@@ -2,11 +2,11 @@ import {
 	Mongo,
 	Postgres,
 	Connection 
-} from "../../config/database.ts";
+} from "../../../../config/database.ts";
 import { 
 	connectMongo,
 	connectPgsql,
-} from "./drivers/mod.ts";
+} from "../../drivers/mod.ts";
 import { 
 	Client as PgsqlClient 
 } from "https://deno.land/x/postgres/mod.ts";

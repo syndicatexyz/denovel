@@ -1,8 +1,9 @@
 import { 
+	Context,
 	Router, 
 	RouterContext,
-	Response
-} from "https://deno.land/x/oak/mod.ts";
+	RouterMiddleware
+} from "./Request.ts";
 
 /**
  * Denovel - A Deno Framework for Web Artisan
@@ -12,51 +13,192 @@ import {
  */
 
 const router = new Router();
+const rootPath = Deno.cwd() + '/app/Controllers/';
 
 class Routes {
-	get(url: string, callback: ((context: RouterContext) => void) | string){
+	async get(url: string, callback: ((context: RouterContext) => void) | string){
 		if(typeof callback === "string"){
-			let controllerName = callback.split("@")[0];
-			let methodName = callback.split("@")[1];
-			let filePath = "../../../../app/Controllers/" + controllerName + ".ts";
+			let responseController = await this.Controller(callback);
 
-			import(filePath).then(obj => {
-				let controller = new obj[controllerName]();
-				router.get(url,controller[methodName]);
-			});
+			if(typeof responseController === "function"){
+				router.get(url,responseController);	
+			}else{
+				router.get(url,(context: Context) => {
+					context.response.body = responseController;
+				});
+			}
 		}else{
-			router.get(url,callback);
+			this.View(url,"get",callback);
 		}
 	}
 
-	post(url: string, callback: ((context: RouterContext) => void) | string){
-
-
+	async post(url: string, callback: ((context: RouterContext) => void) | string){
 		if(typeof callback === "string"){
-			
+			let responseController = await this.Controller(callback);
+
+			if(typeof responseController === "function"){
+				router.post(url,responseController);	
+			}else{
+				router.post(url,(context: Context) => {
+					context.response.body = responseController;
+				});
+			}
 		}else{
-			router.get(url,callback);
+			this.View(url,"post",callback);
 		}
 	}
 
-	put(url: string, callback: ((context: RouterContext) => void) | string){
-
-
+	async put(url: string, callback: ((context: RouterContext) => void) | string){
 		if(typeof callback === "string"){
+			let responseController = await this.Controller(callback);
 
+			if(typeof responseController === "function"){
+				router.put(url,responseController);	
+			}else{
+				router.put(url,(context: Context) => {
+					context.response.body = responseController;
+				});
+			}
 		}else{
-			router.get(url,callback);
+			this.View(url,"put",callback);
 		}
 	}
   
-	delete(url: string, callback: ((context: RouterContext) => void) | string){
-
-
+	async delete(url: string, callback: ((context: RouterContext) => void) | string){
 		if(typeof callback === "string"){
+			let responseController = await this.Controller(callback);
 
+			if(typeof responseController === "function"){
+				router.put(url,responseController);	
+			}else{
+				router.put(url,(context: Context) => {
+					context.response.body = responseController;
+				});
+			}
 		}else{
-			router.get(url,callback);
+			this.View(url,"put",callback);
 		}
+	}
+
+	async Controller (path: string){
+		let controllerName = path.split("@")[0];
+		let methodName = path.split("@")[1];
+		let filePath = rootPath + controllerName + '.ts';
+
+        let checkFile = await this.exists(filePath);
+        if (checkFile) {
+	        let importedController = await import('file:///' + filePath);
+
+	        let controller = new importedController[controllerName]();
+	        
+	        return controller[methodName];
+        }else{
+        	return "Server Error";
+        }
+	}
+
+	View (url: string, method: string, callback: any){
+		if(method == "get"){
+			router.get(url,(context: RouterContext) => {
+				let content = callback(context);
+				if(this.isPromise(content)){
+					content.then((result: any) => {
+						if(typeof result !== "undefined"){
+							context.response.body = result;
+						}else{
+							callback(context);
+						}							
+					})
+				}else{
+					if(typeof content !== "undefined"){
+						context.response.body = content;
+					}else{
+						callback(context);
+					}					
+				}
+			});
+		}else if(method == "post"){
+			router.post(url,(context: RouterContext) => {
+				let content = callback(context);
+				if(this.isPromise(content)){
+					content.then((result: any) => {
+						if(typeof result !== "undefined"){
+							context.response.body = result;
+						}else{
+							callback(context);
+						}							
+					})
+				}else{
+					if(typeof content !== "undefined"){
+						context.response.body = content;
+					}else{
+						callback(context);
+					}					
+				}
+			});
+		}else if(method == "put"){
+			router.put(url,(context: RouterContext) => {
+				let content = callback(context);
+				if(this.isPromise(content)){
+					content.then((result: any) => {
+						if(typeof result !== "undefined"){
+							context.response.body = result;
+						}else{
+							callback(context);
+						}							
+					})
+				}else{
+					if(typeof content !== "undefined"){
+						context.response.body = content;
+					}else{
+						callback(context);
+					}					
+				}
+			});
+		}else if(method == "delete"){
+			router.delete(url,(context: RouterContext) => {
+				let content = callback(context);
+				if(this.isPromise(content)){
+					content.then((result: any) => {
+						if(typeof result !== "undefined"){
+							context.response.body = result;
+						}else{
+							callback(context);
+						}							
+					})
+				}else{
+					if(typeof content !== "undefined"){
+						context.response.body = content;
+					}else{
+						callback(context);
+					}					
+				}
+			});		
+		}	
+	}
+
+	async exists (filename: string): Promise<boolean> {
+	  try {
+	    await Deno.stat(filename);
+	    // successful, file or directory must exist
+	    return true;
+	  } catch (error) {
+	    if (error instanceof Deno.errors.NotFound) {
+	      // file or directory does not exist
+	      return false;
+	    } else {
+	      // unexpected error, maybe permissions, pass it along
+	      throw error;
+	    }
+	  }
+	}
+
+	isPromise(object: any){
+	  if(Promise && Promise.resolve){
+	    return Promise.resolve(object) == object;
+	  }else{
+	    throw "Promise not supported in your environment"
+	  }
 	}
 }
 

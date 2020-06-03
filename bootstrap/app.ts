@@ -1,8 +1,7 @@
 import { 
 	Foundation,
 	Server,
-	Denomand,
-	Test
+	Denomand
 } from "../vendor/mod.ts";
 
 /*
