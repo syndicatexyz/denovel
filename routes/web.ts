@@ -15,12 +15,4 @@ Route.get('/async',async () => {
 	return "Async Function";
 });
 
-Route.group({
-	prefix: 'user'
-},() => {
-	Route.get('/detail',() => {
-		return "Test";
-	});
-});
-
 export { router }

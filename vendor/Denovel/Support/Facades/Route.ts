@@ -15,14 +15,7 @@ import {
 const router = new Router();
 const rootPath = Deno.cwd() + '/app/Controllers/';
 
-interface GroupInterface{
-	prefix: string;
-	middleware: string;
-}
-
 class Routes {
-	grouproutes: Array<object> = []
-
 	async get(url: string, callback: ((context: RouterContext) => void) | string){
 		if(typeof callback === "string"){
 			let responseController = await this.Controller(callback);
@@ -206,10 +199,6 @@ class Routes {
 	  }else{
 	    throw "Promise not supported in your environment"
 	  }
-	}
-
-	group(groupargs: Array<GroupInterface>,callback: object<string>){
-		
 	}
 }
 
