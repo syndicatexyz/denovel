@@ -15,7 +15,9 @@ Route.get('/async',async () => {
 	return "Async Function";
 });
 
-Route.group(['prefix'=>'/users'],() => {
+Route.group({
+	prefix: 'user'
+},() => {
 	Route.get('/detail',() => {
 		return "Test";
 	});
