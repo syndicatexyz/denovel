@@ -15,11 +15,6 @@ import {
 const router = new Router();
 const rootPath = Deno.cwd() + '/app/Controllers/';
 
-interface GroupInterface{
-	prefix: string;
-	middleware: string;
-}
-
 class Routes {
 	grouproutes: Array<object> = []
 
@@ -208,8 +203,13 @@ class Routes {
 	  }
 	}
 
-	group(groupargs: Array<GroupInterface>,callback: object<string>){
-		
+	group(args: object,route: object){
+		this.grouproutes.push({
+			args: args,
+			route: route
+		});	
+
+		console.log(this.grouproutes);		
 	}
 }
 
