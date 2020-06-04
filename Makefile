@@ -2,5 +2,5 @@
 server: 
 	deno run -A --unstable server.ts
 
-server-include: 
+server-with: 
 	deno run -A --unstable server.ts --p=$(or $(port),$(p))
