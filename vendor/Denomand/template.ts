@@ -7,32 +7,19 @@
 
 export default function template(name: string): string{
 
-return `import { database } from '../../vendor/Denovel/_database.ts';
+return `import { database } from '../../vendor/Denovel/Support/Facades/DB.ts';
 import * as dejs from 'https://deno.land/x/dejs@0.6.0/mod.ts';
-import { 
-    Context, 
-    RouterContext
-} from "https://deno.land/x/oak/mod.ts";
+import { RouterContext } from "../../vendor/Denovel/Support/Facades/Request.ts";
 
-export class ${name} {
 
-    /**
-     * Set the output of index function
-     * @param {Context}
-     * @return {Context} abstract of index function
-     */
-
-    async index(ctx: Context){
-
-    }
-
+export class HomeController {
     /**
      * Get the input of get function
      * @param {Context}
      * @return {Context} abstract of get function
      */
 
-    async get(ctx: Context){
+    async get({request,response,params}: RouterContext){
 
     }  
 
@@ -42,7 +29,7 @@ export class ${name} {
      * @return {Context} abstract of post function
      */
 
-    async post({request,response}: Context){
+    async post({request,response,params}: RouterContext){
 
     }  
 
@@ -53,7 +40,7 @@ export class ${name} {
      */
 
     async edit({request,response,params}: RouterContext){
-        
+      
     }  
 
     /**
@@ -74,7 +61,7 @@ export class ${name} {
 
     async delete({request,response,params}: RouterContext){
 
-    }  
+    }   
 }`;
 
 }

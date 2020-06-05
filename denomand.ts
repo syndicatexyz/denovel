@@ -7,5 +7,7 @@ import app from "./bootstrap/app.ts";
  * @author   Muhammad Fauzan <developerfauzan@asraja.com>
  */
 
+app.make("Server").versioning();
+
 app.make("Denomand").command();
 
