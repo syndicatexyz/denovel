@@ -18,8 +18,8 @@ Route.get('/async',async () => {
 Route.group({
 	prefix: 'user'
 },() => {
-	Route.get('/detail',() => {
-		return "Test";
+	Route.get('/detail',() => { 
+		return "Detail";
 	});
 });
 

@@ -50,7 +50,8 @@ app.use(async (ctx, next): Promise<void> => {
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-const pb = new ProgressBar(30, 60, percentageWidget, amountWidget);
+const widgets = [percentageWidget, amountWidget];
+const pb = new ProgressBar({ total: 200, widgets });
 
 for (let i = 0; i < 30; i++) {
   await pb.update(i);

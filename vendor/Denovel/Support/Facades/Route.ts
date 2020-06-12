@@ -16,69 +16,74 @@ const router = new Router();
 const rootPath = Deno.cwd() + '/app/Controllers/';
 
 class Routes {
-	grouproutes: Array<object> = []
+	prefix: string = ""
 
 	async get(url: string, callback: ((context: RouterContext) => void) | string){
+		const prefix = !this.prefix ? "" : "/" + this.prefix
+		console.log(prefix + url);
 		if(typeof callback === "string"){
 			let responseController = await this.Controller(callback);
 
 			if(typeof responseController === "function"){
-				router.get(url,responseController);	
+				router.get(prefix + url,responseController);	
 			}else{
-				router.get(url,(context: Context) => {
+				router.get(prefix + url,(context: Context) => {
 					context.response.body = responseController;
 				});
 			}
 		}else{
-			this.View(url,"get",callback);
+			this.View(prefix + url,"get",callback);
 		}
 	}
 
 	async post(url: string, callback: ((context: RouterContext) => void) | string){
+		const prefix = !this.prefix ? "" : "/" + this.prefix
 		if(typeof callback === "string"){
 			let responseController = await this.Controller(callback);
 
 			if(typeof responseController === "function"){
-				router.post(url,responseController);	
+				router.post(prefix + url,responseController);	
 			}else{
-				router.post(url,(context: Context) => {
+				router.post(prefix + url,(context: Context) => {
 					context.response.body = responseController;
 				});
 			}
 		}else{
-			this.View(url,"post",callback);
+			this.View(prefix + url,"post",callback);
 		}
 	}
 
 	async put(url: string, callback: ((context: RouterContext) => void) | string){
+		const prefix = !this.prefix ? "" : "/" + this.prefix
 		if(typeof callback === "string"){
 			let responseController = await this.Controller(callback);
 
 			if(typeof responseController === "function"){
-				router.put(url,responseController);	
+				router.put(prefix + url,responseController);	
 			}else{
-				router.put(url,(context: Context) => {
+				router.put(prefix + url,(context: Context) => {
 					context.response.body = responseController;
 				});
 			}
 		}else{
-			this.View(url,"put",callback);
+			this.View(prefix + url,"put",callback);
 		}
 	}
   
 	async delete(url: string, callback: ((context: RouterContext) => void) | string){
+		const prefix = !this.prefix ? "" : "/" + this.prefix
 		if(typeof callback === "string"){
 			let responseController = await this.Controller(callback);
 
 			if(typeof responseController === "function"){
-				router.put(url,responseController);	
+				router.delete(prefix + url,responseController);	
 			}else{
-				router.put(url,(context: Context) => {
+				router.delete(prefix + url,(context: Context) => {
 					context.response.body = responseController;
 				});
 			}
 		}else{
-			this.View(url,"put",callback);
+			this.View(prefix + url,"put",callback);
 		}
 	}
 
@@ -203,13 +208,9 @@ class Routes {
 	  }
 	}
 
-	group(args: object,route: object){
-		this.grouproutes.push({
-			args: args,
-			route: route
-		});	
-
-		console.log(this.grouproutes);		
+	group(args: any,route: any){ 
+		this.prefix = args.prefix
+		route()
 	}
 }
 
